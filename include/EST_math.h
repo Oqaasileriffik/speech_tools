@@ -87,10 +87,6 @@ extern "C" {
 #define isnanf(X) __isnanf(X)
 #endif
 
-#ifndef isnanf
-#define isnanf std::isnan
-#endif
-
 /* OS/2 with gcc EMX */
 #if defined(__EMX__)
 #define isnanf(X) isnan(X)
@@ -115,7 +111,7 @@ extern "C" {
 
 #endif
 
-/* Cygwin (at least cygwin 1.7 with gcc 4.3.4) */ 
+/* Cygwin (at least cygwin 1.7 with gcc 4.3.4) */
 #if defined(__CYGWIN__)
 #if __GNUG__ > 3
 #define isnanf(X) isnan(X)
@@ -128,6 +124,10 @@ extern "C" {
 #define finite(X) _finite(X)
 #define round(X) win32_round(X)
   inline double win32_round(double d) { return (d>0.0)?floor(d+0.5):ceil(d-0.5);}
+#endif
+
+#ifndef isnanf
+#define isnanf std::isnan
 #endif
 
 /* These are making assumptions about the under lying architecture  */
